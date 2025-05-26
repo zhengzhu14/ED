@@ -1,0 +1,80 @@
+12 I
+A 3 A 2 A 1 M D C M D C M D M
+20 I
+A 1 A 2 A 3 M D C M D M D A 4 C A 2 A 7 M C M D D M
+6 I
+M C A 2 M D D
+14 I
+A 7 M A 4 M A 6 M A 3 M D M D M D M
+8 C
+A b A b A b M D M D M
+17 C
+A e A b A e A b A a A a M D M D M D M D M D M
+0
+
+
+
+#include <iostream>
+
+
+bool resuelveCaso() {
+    int ops; std::cin >> ops;
+    if (ops == 0) return false;
+    char tipo; std::cin >> tipo;
+    if (tipo == 'I') {
+        stack<int> p;
+        for (int i = 0; i < ops; ++i) {
+            try {
+                char x; int n; 
+                std::cin >> x;
+                if (x == 'A') {std::cin >> n; p.push(n);}
+                else if (x == 'D') p.pop();
+                else if (x == 'C') std::cout << p.top() << '\n';
+                else if (x == 'M') std::cout << p.minimo() << '\n';
+            }
+            catch (std::domain_error & e) {
+                std::cout << e.what() << '\n';
+            }
+        }
+    }
+    else {
+        stack<char> p;
+        for (int i = 0; i < ops; ++i) {
+            try {
+                char x; char n; 
+                std::cin >> x;
+                if (x == 'A') {std::cin >> n; p.push(n);}
+                else if (x == 'D') p.pop();
+                else if (x == 'C') std::cout << p.top() << '\n';
+                else if (x == 'M') std::cout << p.minimo() << '\n';
+            }
+            catch (std::domain_error & e) {
+                std::cout << e.what() << '\n';
+            }
+        }
+    }
+    std::cout << "---\n";
+    return true;
+}
+
+
+int main() {
+   
+#ifndef DOMJUDGE
+    std::ifstream in("datos.txt");
+    auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
+#endif
+   
+    
+    while (resuelveCaso()) ;
+    
+   
+#ifndef DOMJUDGE // para dejar todo como estaba al principio
+    std::cin.rdbuf(cinbuf);
+    system("PAUSE");
+#endif
+    
+    return 0;
+}
+
+
